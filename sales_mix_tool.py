@@ -8,7 +8,12 @@ if uploaded_file is not None:
     st.dataframe(df_raw)
 
 # Load the raw data, specifying the header row and using the first column as 'Item'
-df_raw = pd.read_csv("SalesMixByPrice.csv", header=3)
+
+uploaded_file = st.file_uploader("Upload your SalesMixByPrice.csv file", type=["csv"])
+if uploaded_file is not None:
+    df_raw = pd.read_csv(uploaded_file, header=3)
+    st.write("Preview of uploaded data:")
+    st.dataframe(df_raw)
 
 # Assign df_raw to df and rename the first column to 'Item'
 df = df_raw.rename(columns={df_raw.columns[0]: 'Item'}).copy()
