@@ -9,7 +9,7 @@ if uploaded_file is not None:
     uploaded_file.seek(0)  # Reset pointer after reading
     
     try:
-        df_raw = pd.read_csv(uploaded_file, header=3)
+        df_raw = pd.read_csv(uploaded_file, header=4)
         st.write("Preview of loaded data:")
         st.dataframe(df_raw)
     except pd.errors.EmptyDataError:
