@@ -931,8 +931,8 @@ display(final_with_breaks)
 
 
     # --- Display + Download ---
-    st.subheader("Results")
-    st.dataframe(final, use_container_width=True)
+st.subheader("Results")
+st.dataframe(final, use_container_width=True)
 
-    csv = final.to_csv(index=False).encode("utf-8")
-    st.download_button("Download Categorized CSV", data=csv, file_name="sales_mix_summary.csv", mime="text/csv")
+csv = final.to_csv(index=False).encode("utf-8")
+st.download_button("Download Categorized CSV", data=csv, file_name="sales_mix_summary.csv", mime="text/csv")
