@@ -3,9 +3,19 @@ import pandas as pd
 
 uploaded_file = st.file_uploader("Upload your SalesMixByPrice.csv file", type=["csv"])
 if uploaded_file is not None:
-    df_raw = pd.read_csv(uploaded_file, header=3)
-    st.write("Preview of uploaded data:")
-    st.dataframe(df_raw)
+    # Try reading the file with a preview
+    content = uploaded_file.read().decode('utf-8')
+    st.text_area("File preview", content, height=200)
+    uploaded_file.seek(0)  # Reset pointer after reading
+    
+    try:
+        df_raw = pd.read_csv(uploaded_file, header=3)
+        st.write("Preview of loaded data:")
+        st.dataframe(df_raw)
+    except pd.errors.EmptyDataError:
+        st.error("Your file appears to be empty or does not have enough rows. Make sure it has at least 4 lines, with the header on the fourth line (row 4).")
+    except Exception as e:
+        st.error(f"Error loading file: {e}")
 
 # Load the raw data, specifying the header row and using the first column as 'Item'
 # Load the uploaded CSV, use header row 3 (4th row), and assign first column as 'Item'
