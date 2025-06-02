@@ -1,7 +1,19 @@
-uploaded = files.upload()
+import streamlit as st
 
+st.title("Sales Mix Tool")
 
-import pandas as pd
+# File uploader
+uploaded_file = st.file_uploader("Choose a file to upload", type=["csv", "xlsx"])
+
+if uploaded_file is not None:
+    # You can read the file using pandas, for example
+    import pandas as pd
+    if uploaded_file.name.endswith('.csv'):
+        df = pd.read_csv(uploaded_file)
+    elif uploaded_file.name.endswith('.xlsx'):
+        df = pd.read_excel(uploaded_file)
+    st.write("Preview of uploaded data:")
+    st.dataframe(df)
 
 # Load the raw data, specifying the header row and using the first column as 'Item'
 df_raw = pd.read_csv("SalesMixByPrice.csv", header=3)
